@@ -2,16 +2,37 @@ import React, {Component} from 'react';
 import { AppRegistry, View, Text, StyleSheet } from 'react-native';
 
 class Hello extends Component{
+
+    timeUpdate(){
+        var number = this.state.num;
+        number ++;
+
+        this.setState({
+            num : number
+        })
+    }
+
+     constructor(props){
+            super(props);
+
+            this.state = {
+                num : 1,
+            };
+
+            setInterval(this.timeUpdate.bind(this), 1000);
+        }
+
     render(){
         return (
             <View style={styles.viewStyle}>
-                <Text style={styles.textStyle}>Hello {this.props.name}</Text>
+                <Text style={styles.textStyle}>欢迎来到 {this.props.name} 的直播间</Text>
+                <Text style={styles.textStyle}>观众数量 {this.state.num} 人</Text>
             </View>
         );
     }
 }
 
-export default class setUpProps extends Component {
+export default class setProps extends Component {
     render() {
         return (
             <Hello name='Sunshine' />
@@ -21,11 +42,13 @@ export default class setUpProps extends Component {
 
 const styles=StyleSheet.create({
     viewStyle:{
-        backgroundColor:'#b8860b',
-        flex:1
+        backgroundColor:'white',
+        flex:1,
     },
     textStyle:{
         marginTop:20,
-        fontSize:12
+        alignSelf:'center',
+        color:'red',
+        fontSize:15,
     }
 })
