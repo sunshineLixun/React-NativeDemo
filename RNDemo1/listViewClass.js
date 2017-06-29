@@ -18,7 +18,9 @@ export default class listViewClass extends Component{
                 <ListView 
                 dataSource={this.state.dataSource} 
                 renderRow={this._renderRow.bind(this)} 
-                renderSeparator={this._renderSeparator.bind(this)}>
+                renderSeparator={this._renderSeparator.bind(this)}
+                renderHeader={this._renderHeader.bind(this)}
+                renderFooter={this._renderFooter.bind(this)}>
                 </ListView>
             </View>
         );
@@ -37,9 +39,25 @@ export default class listViewClass extends Component{
      _renderSeparator(sectionID, rowID, adjacentRowHighlighted)  {
         console.log(sectionID,rowID,adjacentRowHighlighted);
         return (
-            <View style={{height:1,backgroundColor:'black'}}></View>
+            <View style={{height:1,backgroundColor:'#c0c0c0'}}></View>
         )
     }
 
+
+    _renderHeader(){
+        return(
+            <View>
+                <Text>头部视图</Text>
+            </View>
+        )
+    }
+
+    _renderFooter(){
+        return(
+            <View style={{marginTop:5,height:50,flex:1,justifyContent:'center'}}>
+                <Text style={{fontSize:20}}>尾部视图</Text>
+            </View>
+        )
+    }
 
 }
