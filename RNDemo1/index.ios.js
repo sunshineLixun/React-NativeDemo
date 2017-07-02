@@ -6,5 +6,6 @@ import setLayout from './src/components/setLayout';
 import setProps from './src/components/setProps'
 import componentByValue from './src/components/componentByValue'
 import listViewClass from './src/components/listViewClass'
+import NavigatiorDemo from './src/components/NavigatiorDemo'
 
-AppRegistry.registerComponent('RNDemo1', () => listViewClass);
+AppRegistry.registerComponent('RNDemo1', () => NavigatiorDemo);
