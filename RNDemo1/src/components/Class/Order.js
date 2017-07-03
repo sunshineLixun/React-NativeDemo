@@ -5,7 +5,8 @@ import TabBarItem from './TabBarItem'
 
 export default class Order extends React.Component{
     static navigationOptions = ({navigation}) => ({
-        tabBarLabel: '订单',
+        // tabBarLabel: '订单',
+        title: '订单',
         tabBarIcon:({tintColor,focused}) => (
             <TabBarItem  
               tintColor={tintColor}  

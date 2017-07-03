@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import {View,Text,Image,StyleSheet} from 'react-native';
-import {TabNavigator} from 'react-navigation';
+import {TabNavigator,StackNavigator} from 'react-navigation';
 
 import Discover from './Class/Discover'
 import Order from './Class/Order'
 import Message from './Class/Message'
 import My from './Class/My'
-
+import DiscoverDetail from './Class/DiscoverDetail'
 
 const MainScreenNavigator = TabNavigator(
     {
@@ -36,13 +36,22 @@ const MainScreenNavigator = TabNavigator(
     }
 );
 
+const MainSrceenStackNavigator = StackNavigator(
+    {
+        MainScreenNavigator: {screen: MainScreenNavigator},
+        DiscoverDetail: {screen: DiscoverDetail},
+    },
+    {
+        initialRouteName: 'MainScreenNavigator',
+        mode:'card',
+        headerMode:'float',
+    }
+);
+
+
 export default class NavigationDemo extends React.Component{
     render(){
-        return(
-            <MainScreenNavigator>
-                <View style={{flex:1}}></View>
-            </MainScreenNavigator>
-        )
+        return <MainSrceenStackNavigator />
     }
 }
 

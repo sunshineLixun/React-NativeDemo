@@ -5,7 +5,9 @@ import TabBarItem from './TabBarItem'
 
 export default class Message extends React.Component{
     static navigationOptions = ({navigation}) => ({
-        tabBarLabel: '消息',
+        // tabBarLabel: '消息',
+        // headerTitle: '消息',
+        title: '消息',
         tabBarIcon:({tintColor,focused}) => (
             <TabBarItem  
               tintColor={tintColor}  
