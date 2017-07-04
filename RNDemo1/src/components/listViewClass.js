@@ -71,7 +71,6 @@ export default class listViewClass extends Component{
         )
     }
 
-
     _renderHeader(){
         return(
             <View>
