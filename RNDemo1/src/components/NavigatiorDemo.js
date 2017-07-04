@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import {View,Text,Image,StyleSheet} from 'react-native';
-import {TabNavigator,StackNavigator} from 'react-navigation';
+import {TabNavigator,StackNavigator,DrawerNavigator} from 'react-navigation';
 
 import Discover from './Class/Discover'
 import Order from './Class/Order'
 import Message from './Class/Message'
 import My from './Class/My'
 import DiscoverDetail from './Class/DiscoverDetail'
+import FriendsList from './Class/FriendsList'
 
 const MainScreenNavigator = TabNavigator(
     {
@@ -24,11 +25,13 @@ const MainScreenNavigator = TabNavigator(
         },
     },
     {
+		lazy:true,
+		animationEnabled:false,
+		swipeEnabled:false,
+		initialRouteName: 'Discover',	
         tabBarOptions:{
-            activeTintColor:'#A42102',
-            activeBackgroundColor:'white',
-            inactiveTintColor:'#B2B4B7',
-            inactiveBackgroundColor:'white',
+            activeTintColor: '#A42102',
+            inactiveTintColor: '#B2B4B7',
             labelStyle:{
                 fontSize:10
             }
@@ -44,7 +47,7 @@ const MainSrceenStackNavigator = StackNavigator(
     {
         initialRouteName: 'MainScreenNavigator',
         mode:'card',
-        headerMode:'float',
+        headerMode:'screen',
     }
 );
 
@@ -54,6 +57,7 @@ export default class NavigationDemo extends React.Component{
         return <MainSrceenStackNavigator />
     }
 }
+
 
 
 
