@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
-import {View,Text,Image,StyleSheet,TouchableOpacity,ListView,TouchableHighlight} from 'react-native';
+import {View,Text,Image,StyleSheet,TouchableOpacity,ListView,TouchableHighlight,ActivityIndicator} from 'react-native';
 import {TabNavigator,StackNavigator} from 'react-navigation';
 import TabBarItem from './TabBarItem'
+
+const REQUEST_URL = 'http://www.imooc.com/api/teacher?type=4&num=30';
 
 export default class Discover extends React.Component{
 
     constructor(props) {
         super(props);
-        var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+
           this.state = {
-              ds,
+              ds: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
+              load:false,
           };
         //   this._dataSource = [];
     };
@@ -20,11 +23,12 @@ export default class Discover extends React.Component{
         //     ds: this.state.ds.cloneWithRows(this._dataSource),
         // })
 
-        fetch('http://www.imooc.com/api/teacher?type=4&num=30')
+        fetch(REQUEST_URL)
         .then((response)=>response.json())
         .then((jsonData)=>{
             this.setState({
-                ds: this.state.ds.cloneWithRows(jsonData.data)
+                ds: this.state.ds.cloneWithRows(jsonData.data),
+                load: true,
             })
         })
         .catch((error)=>{
@@ -61,18 +65,21 @@ export default class Discover extends React.Component{
               focused={focused}  
               normalImage={require('./source/发现@2x.png')}  
               selectedImage={require('./source/发现-选中@2x.png')}  
-            />  
+            />
             ),
     });
 
     render(){
-        if (!this.state.ds) {
+        if (!this.state.load) {
                 return(
                     <View style={{backgroundColor:'white',flex:1,justifyContent:'center',alignItems:'center'}}> 
-                        <Text style={{fontSize:20,color:'red'}}>Loading...</Text>
+                        <ActivityIndicator 
+                        size="large" 
+                        color='red'
+                        />
                     </View>
-                ) 
-         }else{
+                    ) 
+        }else{
             return (
             <View style={{backgroundColor:'white',flex:1}}>
                 <ListView 
@@ -127,7 +134,7 @@ const styles = StyleSheet.create({
     textStyle: {
         fontSize:15,
         marginLeft:10,
-        marginTop: 5
+        marginTop: 5,
     },
     titleStyle: {
         fontSize: 17,

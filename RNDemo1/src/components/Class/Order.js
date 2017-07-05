@@ -19,5 +19,5 @@ export default class Order extends React.Component{
 
     render(){
             return <View style={{backgroundColor:'#6495ed',flex:1}}></View>
-    }
+    }    
 }
