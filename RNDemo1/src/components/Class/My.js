@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View,Text,Image,StyleSheet,ListView} from 'react-native';
+import {View,Text,Image,StyleSheet,ListView,TouchableOpacity} from 'react-native';
 import {TabNavigator} from 'react-navigation';
 import TabBarItem from './TabBarItem'
 
@@ -10,8 +10,9 @@ export default class My extends React.Component{
 
         var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2,sectionHeaderHasChanged:(s1,s2)=>s1 !== s2});
         this.state = {
-            dataSource: ds.cloneWithRowsAndSections([['钱包'],['收藏','相册','卡包','表情'],['设置']])
+            dataSource: ds.cloneWithRowsAndSections([['钱包'],['收藏','相册','卡包','表情'],['设置']]),
         };
+
     }
 
     static navigationOptions = ({navigation})=>({
@@ -38,7 +39,7 @@ export default class My extends React.Component{
             <View style={styles.container}>
                 <ListView 
                 dataSource={this.state.dataSource}
-                renderRow={this._renderRow}
+                renderRow={this._renderRow.bind(this)}
                 renderSeparator={this._renderSeparator}>
                 </ListView>
             </View>
@@ -48,21 +49,36 @@ export default class My extends React.Component{
     _renderRow(rowData, sectionID, rowID, highlightRow){
         if (sectionID == 0) {
             return(
-                <View style={styles.section_0_style}>
-                    <Text style={{fontSize:15}}>{rowData}</Text>
-                </View>
+                <TouchableOpacity onPress={() =>{
+                    highlightRow(sectionID,rowID),
+                    this.props.navigation.navigate('SettingDetail',{'name': rowData})
+                }}>
+                    <View style={styles.section_0_style}>
+                        <Text style={{fontSize:15}}>{rowData}</Text>
+                    </View>
+                </TouchableOpacity>
             )
         }else if(sectionID == 1){
             return(
+            <TouchableOpacity onPress={() =>{
+                    highlightRow(sectionID,rowID),
+                    this.props.navigation.navigate('SettingDetail',{'name': rowData})
+                }}>   
             <View style={styles.viewStyle}>
                 <Text style={{fontSize:15}}>{rowData}</Text>
             </View>
+            </TouchableOpacity>
             )
         }else{
             return(
+                <TouchableOpacity onPress={() =>{
+                    highlightRow(sectionID,rowID),
+                    this.props.navigation.navigate('SettingDetail',{'name': rowData})
+                }}>
                 <View style={styles.section_0_style}>
                      <Text style={{fontSize:15}}>{rowData}</Text>
                 </View>
+                </TouchableOpacity>
             )
         }
     }

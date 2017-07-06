@@ -8,6 +8,7 @@ import Message from './Class/Message'
 import My from './Class/My'
 import DiscoverDetail from './Class/DiscoverDetail'
 import FriendsList from './Class/FriendsList'
+import SettingDetail from './Class/SettingDetail'
 
 const MainScreenNavigator = TabNavigator(
     {
@@ -43,6 +44,7 @@ const MainSrceenStackNavigator = StackNavigator(
     {
         MainScreenNavigator: {screen: MainScreenNavigator},
         DiscoverDetail: {screen: DiscoverDetail},
+        SettingDetail: {screen: SettingDetail}
     },
     {
         initialRouteName: 'MainScreenNavigator',
