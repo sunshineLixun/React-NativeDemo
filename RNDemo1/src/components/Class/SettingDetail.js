@@ -8,6 +8,9 @@ export default class SettingDetail extends React.Component{
     static navigationOptions = ({navigation}) => ({
         title:`${navigation.state.params.name}`,
         headerBackTitle: '返回',
+        headerBackTitleStyle:{
+            color:'black'
+        }
     })
 
     render(){

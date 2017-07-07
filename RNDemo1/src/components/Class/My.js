@@ -17,7 +17,7 @@ export default class My extends React.Component{
 
     static navigationOptions = ({navigation})=>({
         // tabBarLabel: '我的',
-        title: '我',
+        headerTitle: '我',
         headerStyle:{
             backgroundColor: 'black'
         },

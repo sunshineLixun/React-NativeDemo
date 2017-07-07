@@ -1,5 +1,15 @@
 import React, { Component } from 'react';
-import {View,Text,Image,StyleSheet,TouchableOpacity,ListView,TouchableHighlight,ActivityIndicator} from 'react-native';
+import { 
+    View,
+    Text,
+    Image,
+    StyleSheet,
+    TouchableOpacity,
+    ListView,
+    TouchableHighlight,
+    ActivityIndicator,
+    RefreshControl
+} from 'react-native';
 import {TabNavigator,StackNavigator} from 'react-navigation';
 import TabBarItem from './TabBarItem'
 
@@ -13,6 +23,7 @@ export default class Discover extends React.Component{
           this.state = {
               ds: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
               load:false,
+              refreshing:true
           };
         //   this._dataSource = [];
     };
@@ -22,19 +33,31 @@ export default class Discover extends React.Component{
         // this.setState({
         //     ds: this.state.ds.cloneWithRows(this._dataSource),
         // })
+         this._getRequest()
+    }
 
+    _onRefresh(){
+        this._getRequest()
+    }
+
+    _getRequest(){
         fetch(REQUEST_URL)
         .then((response)=>response.json())
         .then((jsonData)=>{
             this.setState({
                 ds: this.state.ds.cloneWithRows(jsonData.data),
                 load: true,
+                //请求到数据之后，停止刷新 更新State状态
+                refreshing:false
             })
         })
         .catch((error)=>{
+            this.setState({
+                load: true,
+                refreshing: false
+            })
             alert('请求失败');
         })
-
     }
 
     static navigationOptions = ({navigation})=>({
@@ -85,7 +108,13 @@ export default class Discover extends React.Component{
                 <ListView 
                 dataSource={this.state.ds} 
                 renderRow={this._renderRow.bind(this)} 
-                renderSeparator={this._renderSeparator.bind(this)}>
+                renderSeparator={this._renderSeparator.bind(this)}
+                refreshControl={
+                    <RefreshControl 
+                    title="Loading..."
+                    refreshing={this.state.refreshing}
+                    onRefresh={this._onRefresh.bind(this)}/>
+                }>
                 </ListView>
             </View>
             )
