@@ -7,5 +7,6 @@ import setProps from './src/components/setProps'
 import componentByValue from './src/components/componentByValue'
 import listViewClass from './src/components/listViewClass'
 import NavigatiorDemo from './src/components/NavigatiorDemo'
+import Login from './src/components/Demo/Login'
 
-AppRegistry.registerComponent('RNDemo1', () => NavigatiorDemo);
+AppRegistry.registerComponent('RNDemo1', () => Login);
